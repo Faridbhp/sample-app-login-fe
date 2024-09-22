@@ -1,29 +1,55 @@
 // components/PopUp.jsx
-import React from 'react';
-import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
+import React from "react";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Button,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialog-paper": {
+    borderRadius: 10,
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+  },
+}));
+
+const StyledDialogTitle = styled(DialogTitle)(({ theme, isSuccess }) => ({
+  backgroundColor: isSuccess ? "#4CAF50" : "#F44336",
+  color: "#fff",
+  alignItems: "center",
+  padding: "10px 20px",
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "blue",
+  color: "#fff",
+}));
 
 const PopUp = ({ open, onClose, message, isSuccess }) => {
   return (
-    <Dialog
+    <StyledDialog
       open={open}
       onClose={onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">
-        {isSuccess ? 'Success' : 'Error'}
-      </DialogTitle>
+      <StyledDialogTitle isSuccess={isSuccess}>
+        <Typography style={{textAlign: 'center'}} variant="h6">{isSuccess ? "Success" : "Error"}</Typography>
+      </StyledDialogTitle>
       <DialogContent>
-        <Typography id="alert-dialog-description">
-          {message || 'No message available'}
+        <Typography style={{marginTop: 10}} id="alert-dialog-description">
+          {message || "No message available"}
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
-          OK
-        </Button>
+        <StyledButton onClick={onClose}>OK</StyledButton>
       </DialogActions>
-    </Dialog>
+    </StyledDialog>
   );
 };
 

@@ -6,4 +6,5 @@ export const UrlApi = {
   register: `${url}/register`,
   forgotPassword: `${url}/forgot-password`,
   resetPassword: `${url}/reset-password`,
+  validateRegister: `${url}/verify-otp`,
 };
