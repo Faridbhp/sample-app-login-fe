@@ -20,18 +20,28 @@ const loginSlice = createSlice({
   name: "login",
   initialState: {
     data: null,
+    isLoading: false, // Tambahkan isLoading ke state
+    error: null, // Tambahkan error ke state untuk menangani error
   },
   reducers: {
     clearData: (state) => {
       state.data = null;
+      state.error = null; // Reset error saat data dibersihkan
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true; // Set isLoading ke true saat request dimulai
+        state.error = null; // Reset error saat request baru dimulai
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoading = false; // Set isLoading ke false saat request selesai
         state.data = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false; // Set isLoading ke false jika request gagal
+        state.error = action.payload; // Simpan error yang diterima
         state.data = null;
       });
   },
