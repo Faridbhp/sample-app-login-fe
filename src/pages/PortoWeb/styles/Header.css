@@ -1,0 +1,56 @@
+/* Header.css */
+.header {
+    background: linear-gradient(135deg, #6c63ff, #3f3d56);
+    /* Gradient background */
+    color: #fff;
+    /* White text */
+    padding: 20px 0;
+    /* Padding for top and bottom */
+    text-align: center;
+    /* Center-align text */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Shadow for depth */
+    border-radius: 15px;
+  }
+  
+  .header-content {
+    max-width: 800px;
+    /* Limit width for better readability */
+    margin: 0 auto;
+    /* Center the content */
+  }
+  
+  .header-title {
+    font-size: 2.5em;
+    /* Larger font size for title */
+    margin: 0;
+    /* Remove margin */
+  }
+  
+  .header-subtitle {
+    font-size: 1.2em;
+    /* Slightly larger subtitle */
+    margin: 10px 0;
+    /* Margin for spacing */
+  }
+  
+  .header-nav {
+    margin-top: 15px;
+    /* Space between subtitle and nav */
+  }
+  
+  .nav-link {
+    color: #fff;
+    /* White text for links */
+    text-decoration: none;
+    /* Remove underline */
+    margin: 0 15px;
+    /* Margin for spacing */
+    transition: color 0.3s;
+    /* Transition effect for hover */
+  }
+  
+  .nav-link:hover {
+    color: #ffcc00;
+    /* Change color on hover */
+  }

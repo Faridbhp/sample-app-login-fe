@@ -1,0 +1,50 @@
+/* About.css */
+.about {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradient background */
+    padding: 40px 20px; /* Padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 800px; /* Limit width for readability */
+    margin: 40px auto; /* Center section and add vertical margin */
+    text-align: center; /* Center-align text */
+    border-radius: 15px;
+  }
+  
+  .about h2 {
+    font-size: 2.5em; /* Larger font size for heading */
+    color: #333; /* Dark color for heading */
+    margin-bottom: 20px; /* Space below heading */
+  }
+  
+  .about-content {
+    display: flex; /* Flexbox layout for content */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+  }
+  
+  .about-text p {
+    font-size: 1.2em; /* Slightly larger font size for paragraph */
+    line-height: 1.6; /* Improve line spacing */
+    color: #555; /* Medium gray color for text */
+    margin: 0; /* Remove default margin */
+    margin-bottom: 20px; /* Space below text */
+  }
+  
+  .about-icons {
+    display: flex;
+    justify-content: center; /* Center the icons horizontally */
+    gap: 20px; /* Add space between icons */
+  }
+  
+  .icon {
+    text-align: center; /* Center-align the text */
+  }
+  
+  .icon-image {
+    transition: transform 0.3s ease; /* Smooth transition for the hover effect */
+  }
+  
+  /* Hover effect */
+  .icon-image:hover {
+    transform: translateY(-10px); /* Move the icon upwards when hovered */
+  }

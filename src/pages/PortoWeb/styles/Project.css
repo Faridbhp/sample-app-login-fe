@@ -1,0 +1,107 @@
+/* General Projects Styles */
+.projects {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Gradient background */
+    padding: 40px 20px; /* Padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    max-width: 800px; /* Limit width for readability */
+    margin: 40px auto; /* Center section and add vertical margin */
+    text-align: center; /* Center-align text */
+    border-radius: 15px;
+}
+
+.projects h2 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.projects h3 {
+    color: #6c63ff;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.project-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center projects by default */
+}
+
+.project-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex: 0 0 45%; /* Take up to 45% of the width for each card */
+    max-width: 300px;
+}
+
+.project-list.single-project .project-card {
+    flex: 0 0 100%; /* Full width for single project */
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-link {
+    color: #6c63ff;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+.technologies {
+    margin-top: 15px;
+    color: #555;
+}
+
+/* Responsive Styles */
+
+/* For small screens, like mobile devices */
+@media (max-width: 768px) {
+    .project-card {
+        flex: 0 0 90%; /* Make each card take full width */
+        max-width: 90%; /* No max width, fill container */
+    }
+
+    .projects {
+        padding: 20px 10px; /* Reduce padding on smaller screens */
+        max-width: 100%; /* Allow full width */
+    }
+
+    .projects h2 {
+        font-size: 2rem; /* Slightly reduce font size for small screens */
+    }
+
+    .projects h3 {
+        font-size: 1.5rem; /* Reduce heading size for small screens */
+    }
+}
+
+/* For very small screens, like phones in portrait mode */
+@media (max-width: 480px) {
+    .project-card {
+        padding: 15px; /* Reduce padding for project cards */
+    }
+
+    .projects h2 {
+        font-size: 1.8rem; /* Reduce heading size further */
+    }
+
+    .projects h3 {
+        font-size: 1.3rem; /* Reduce sub-heading size further */
+    }
+}

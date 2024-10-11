@@ -1,0 +1,43 @@
+.skills {
+  background: linear-gradient(135deg, #f8f9fa 30%, #e9ecef 70%); /* Adjusted gradient */
+  padding: 40px 20px; /* Padding for spacing */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  max-width: 800px; /* Limit width for readability */
+  margin: 40px auto; /* Center section and add vertical margin */
+  text-align: center; /* Center-align text */
+}
+
+
+.skills h2 {
+  text-align: center; /* Center the heading */
+  font-size: 2rem;
+  margin-bottom: 20px; /* Space below the heading */
+  color: #333; /* Dark text color */
+}
+
+.skills-list {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-evenly; /* Center the items */
+  flex-wrap: wrap; /* Allow wrapping */
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove default padding */
+}
+
+.skill-item {
+  background-color:  #6c63ff; /* Bootstrap primary color */
+  color: white; /* Black text for contrast */
+  border-radius: 20px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for spacing */
+  margin: 5px; /* Space around each item */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s; /* Smooth transition on hover */
+  min-width: 100px; /* Set a minimum width for consistency */
+  text-align: center; /* Center text within the skill item */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  background-color:#007bff;  /* Change color on hover */
+}

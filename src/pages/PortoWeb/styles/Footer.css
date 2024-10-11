@@ -1,0 +1,54 @@
+/* Footer.css */
+.footer {
+    background: linear-gradient(135deg, #3f3d56, #6c63ff);
+    /* Same gradient as header */
+    color: #fff;
+    /* White text */
+    padding: 20px 0;
+    /* Padding for top and bottom */
+    text-align: center;
+    /* Center-align text */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    /* Shadow for depth */
+    position: relative;
+    /* Ensure proper stacking context */
+    bottom: 0;
+    /* Stick to bottom if needed */
+    width: 100%;
+    /* Full width */
+    border-radius: 15px;
+    margin: 40px auto;
+}
+
+.footer-content {
+    max-width: 800px;
+    /* Limit width for better readability */
+    margin: 0 auto;
+    /* Center the content */
+}
+
+.footer h2 {
+    margin: 0 0 10px;
+    /* Margin for spacing */
+}
+
+.footer-links {
+    margin-top: 10px;
+    /* Space between text and links */
+}
+
+.footer-link {
+    color: #ffcc00;
+    /* Use a contrasting color for links */
+    text-decoration: none;
+    /* Remove underline */
+    margin: 0 15px;
+    /* Margin for spacing */
+    transition: color 0.3s;
+    /* Transition effect for hover */
+}
+
+.footer-link:hover {
+    color: #fff;
+    /* Change color on hover */
+}
