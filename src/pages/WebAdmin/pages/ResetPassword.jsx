@@ -9,16 +9,28 @@ import {
   Alert,
 } from "@mui/material";
 import PopUp from "../components/PopUp";
-import { resetPasswordReducer } from "../reducer/resetPasswordReducer";
+import { resetPasswordReducer } from "../../../reducer/resetPasswordReducer";
 
 const ResetPassword = () => {
   const [formData, setFormData] = useState({
-    email: "faridbhp9431@gmail.com",
+    email: "",
     password: "",
     confirmPassword: "",
     token: "",
   });
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    // Mengambil semua query parameter
+    const queryParams = new URLSearchParams(location.search);
+
+    // Mendapatkan nilai token dan email dari URL
+    const token = queryParams.get("token");
+    const email = queryParams.get("email");
+    console.log("token", token);
+    console.log("email", email);
+    setFormData({ ...formData, token, email });
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

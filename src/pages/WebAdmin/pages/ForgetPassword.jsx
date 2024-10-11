@@ -12,7 +12,7 @@ import {
 import {
   clearData,
   forgotPasswordReducer,
-} from "../reducer/forgotPasswordReducer";
+} from "../../../reducer/forgotPasswordReducer";
 import PopUp from "../components/PopUp";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +21,7 @@ const ForgetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    email: "faridbhp9431@gmail.com",
+    email: "farid.bhp9431@gmail.com",
   });
   const { data: dataResetPassword } = useSelector(
     (state) => state.forgotPassword
@@ -39,8 +39,9 @@ const ForgetPassword = () => {
     try {
       dispatch(forgotPasswordReducer(formData))
         .unwrap()
-        .then(() => {
-          setOpen(true);
+        .then((resp) => {
+          console.log('response', resp)
+          // setOpen(true);
         });
     } catch (err) {
       console.error("ForgetPassword error:", err);

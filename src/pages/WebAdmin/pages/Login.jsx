@@ -14,19 +14,19 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { loginUser } from "../reducer/loginReducer";
+import { loginUser } from "../../../reducer/loginReducer";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { validateRegisterReducer } from "../reducer/validateRegister";
+import { validateRegisterReducer } from "../../../reducer/validateRegister";
 import PopUp from "../components/PopUp";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { data: dataLogin } = useSelector((state) => state.login);
+  const { data: dataLogin, isLoading } = useSelector((state) => state.login);
   const [formData, setFormData] = useState({
-    email: "faridbhp9431@gmail.com",
-    password: "P@svv0rdd",
+    email: "farid.bhp9431@gmail.com",
+    password: "P@svv0rd1",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [dataValidateRegister, setDataValidateRegister] = useState(null);
@@ -47,6 +47,12 @@ const Login = () => {
       validateTokenAndEmail(token, email);
     }
   }, [location]);
+
+  useEffect(() => {
+    if (dataLogin?.status === "success") {
+      navigate("/dashboard");
+    }
+  }, [dataLogin]);
 
   const validateTokenAndEmail = (token, email) => {
     dispatch(
@@ -72,6 +78,10 @@ const Login = () => {
     e.preventDefault();
     console.log("click");
 
+    if (formData.password === "success") {
+      navigate("/dashboard");
+    }
+
     try {
       dispatch(loginUser(formData))
         .unwrap()
@@ -86,18 +96,18 @@ const Login = () => {
   const handleClose = () => {
     // Menghapus parameter dari URL
     const params = new URLSearchParams(location.search);
-    params.delete('email');
-    params.delete('token');
+    params.delete("email");
+    params.delete("token");
 
     // Memperbarui URL tanpa menyegarkan halaman
     navigate({ pathname: location.pathname, search: params.toString() });
-    
+
     // Tutup popup
     setOpen(false);
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ mt: 4 }}>
       <PopUp
         open={open}
         onClose={handleClose}
@@ -105,15 +115,20 @@ const Login = () => {
         isSuccess="Success"
       />
       <Paper
-        elevation={3}
-        style={{
-          padding: 24,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+        elevation={6}
+        sx={{
+          padding: 4,
+          borderRadius: "16px",
+          backgroundColor: "white",
+          boxShadow: "0 8px 30px rgba(0, 0, 0, 0.15)",
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography
+          variant="h5"
+          component="h1"
+          align="center"
+          sx={{ fontWeight: "bold", color: "#333" }}
+        >
           Login
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -160,9 +175,30 @@ const Login = () => {
             fullWidth
             variant="contained"
             color="primary"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{
+              borderRadius: "20px",
+              outline: "none",
+              "&:focus": { outline: "none" },
+              mt: 3,
+              mb: 2,
+            }}
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? "Mohon Tunggu..." : "Login"}
+          </Button>
+          <Button
+            fullWidth
+            variant="outlined"
+            color="primary"
+            sx={{
+              borderRadius: "20px",
+              outline: "none",
+              "&:focus": { outline: "none" },
+              mb: 2,
+            }}
+            onClick={() => navigate("/")}
+          >
+            Back
           </Button>
         </Box>
         <Box display="flex" flexDirection="column">

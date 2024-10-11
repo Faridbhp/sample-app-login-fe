@@ -16,8 +16,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearData, registerUser } from "../reducer/registerReducer";
-import PopUp from "../components/PopUp";
+import { clearData, registerUser } from "../../../reducer/registerReducer";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const steps = ["Personal Information", "Password"];
@@ -111,6 +110,12 @@ const Register = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
             />
             <TextField
               fullWidth
@@ -119,6 +124,12 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
             />
             <TextField
               fullWidth
@@ -127,6 +138,12 @@ const Register = () => {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
             />
           </>
         );
@@ -138,9 +155,15 @@ const Register = () => {
               margin="normal"
               label="Password"
               name="password"
-              type={showPassword ? "text" : "password"} // Tipe input berubah berdasarkan state showPassword
+              type={showPassword ? "text" : "password"}
               value={formData.password}
               onChange={handleChange}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -156,9 +179,15 @@ const Register = () => {
               margin="normal"
               label="Confirm Password"
               name="confirmPassword"
-              type={showConfirmPassword ? "text" : "password"} // Tipe input berubah berdasarkan state showConfirmPassword
+              type={showConfirmPassword ? "text" : "password"}
               value={formData.confirmPassword}
               onChange={handleChange}
+              variant="outlined"
+              sx={{
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -180,38 +209,61 @@ const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{ mt: 4 }}>
       {dataRegister && (
         <Alert
           severity={dataRegister?.status === "success" ? "success" : "error"}
+          sx={{ mb: 2 }} // Added margin for spacing
         >
           {dataRegister?.message}
         </Alert>
       )}
-      {/* <PopUp
-        open={!!dataRegister}
-        onClose={handleClose}
-        message={dataRegister?.message}
-        isSuccess={dataRegister?.status}
-      /> */}
-      <Paper elevation={3} sx={{ padding: 3 }}>
-        <Typography variant="h5" component="h1" align="center">
+      <Paper
+        elevation={6}
+        sx={{
+          padding: 4,
+          borderRadius: "16px",
+          backgroundColor: "white",
+          boxShadow: "0 8px 30px rgba(0, 0, 0, 0.15)",
+        }}
+      >
+        <Typography
+          variant="h5"
+          component="h1"
+          align="center"
+          sx={{ fontWeight: "bold", color: "#333" }}
+        >
           Register
         </Typography>
 
-        <Stepper activeStep={activeStep} sx={{ mt: 2 }}>
+        <Stepper activeStep={activeStep} sx={{ mt: 3, color: "#6c63ff" }}>
           {steps.map((label) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel sx={{ color: "#6c63ff" }}>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
+
         <Box sx={{ mt: 2 }}>{renderStepContent(activeStep)}</Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-          <Button onClick={handleBack} variant="outlined">
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+          <Button
+            onClick={handleBack}
+            variant="outlined"
+            color="primary"
+            sx={{ borderRadius: "20px" }}
+          >
             &lt; Back
           </Button>
-          <Button onClick={handleNext} variant="contained" color="primary">
+          <Button
+            onClick={handleNext}
+            variant="contained"
+            color="primary"
+            sx={{
+              borderRadius: "20px",
+              outline: "none",
+              "&:focus": { outline: "none" },
+            }} // Add this line
+          >
             {activeStep === steps.length - 1 ? "Submit" : "Next >"}
           </Button>
         </Box>
