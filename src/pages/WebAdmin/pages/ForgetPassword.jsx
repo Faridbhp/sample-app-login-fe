@@ -13,20 +13,16 @@ import {
   clearData,
   forgotPasswordReducer,
 } from "../../../reducer/forgotPasswordReducer";
-import PopUp from "../components/PopUp";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 const ForgetPassword = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "farid.bhp9431@gmail.com",
   });
-  const { data: dataResetPassword } = useSelector(
+  const { data: dataForgetPassword, isLoading } = useSelector(
     (state) => state.forgotPassword
   );
-  const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,39 +36,24 @@ const ForgetPassword = () => {
       dispatch(forgotPasswordReducer(formData))
         .unwrap()
         .then((resp) => {
-          console.log('response', resp)
-          // setOpen(true);
+          console.log("response", resp);
         });
     } catch (err) {
       console.error("ForgetPassword error:", err);
     }
   };
 
-  const handleClose = async () => {
-    try {
-      await dispatch(clearData());
-
-      // Close the dialog
-      setOpen(false);
-
-      // Navigate to the login page
-      if (dataResetPassword) {
-        navigate("/resetPassword");
-      }
-    } catch (error) {
-      console.error("Failed to clear feedback:", error);
-      // Optionally handle the error (e.g., show an error message)
-    }
-  };
-
   return (
     <Container component="main" maxWidth="xs">
-      <PopUp
-        open={open}
-        onClose={handleClose}
-        message={dataResetPassword?.message}
-        isSuccess="Success"
-      />
+      {dataForgetPassword && (
+        <Alert
+          severity={
+            dataForgetPassword?.status === "success" ? "success" : "error"
+          }
+        >
+          {dataForgetPassword?.message}
+        </Alert>
+      )}
       <Paper
         elevation={3}
         style={{
@@ -105,8 +86,9 @@ const ForgetPassword = () => {
             variant="contained"
             color="primary"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isLoading}
           >
-            Send Email
+            {isLoading ? "Mohon Tunggu.." : "Send Email"}
           </Button>
         </Box>
       </Paper>

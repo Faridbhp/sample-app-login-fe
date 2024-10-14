@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Paper,
@@ -8,17 +8,22 @@ import {
   Button,
   Alert,
 } from "@mui/material";
-import PopUp from "../components/PopUp";
 import { resetPasswordReducer } from "../../../reducer/resetPasswordReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     token: "",
   });
-  const [open, setOpen] = useState(false);
+  const { data: dataResetPassword, isLoading } = useSelector(
+    (state) => state.resetPassword
+  );
 
   useEffect(() => {
     // Mengambil semua query parameter
@@ -37,8 +42,13 @@ const ResetPassword = () => {
     try {
       dispatch(resetPasswordReducer(formData))
         .unwrap()
-        .then(() => {
-          setOpen(true);
+        .then((resp) => {
+          console.log("resp", resp.status);
+          if (resp.status == "success") {
+            setTimeout(() => {
+              navigate("/login");
+            }, 3000);
+          }
         });
     } catch (err) {
       console.error("ResetPassword error:", err);
@@ -50,27 +60,17 @@ const ResetPassword = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleClose = async () => {
-    try {
-      // Dispatch the action to clear feedback
-      // await dispatch(clearData());
-
-      // Close the dialog
-      setOpen(false);
-    } catch (error) {
-      console.error("Failed to clear feedback:", error);
-      // Optionally handle the error (e.g., show an error message)
-    }
-  };
-
   return (
     <Container component="main" maxWidth="xs">
-      <PopUp
-        open={open}
-        onClose={handleClose}
-        message={"dataRegister?.message"}
-        isSuccess={"dataRegister?.status"}
-      />
+      {dataResetPassword && (
+        <Alert
+          severity={
+            dataResetPassword?.status === "success" ? "success" : "error"
+          }
+        >
+          {dataResetPassword?.message}
+        </Alert>
+      )}
       <Paper
         elevation={3}
         style={{
@@ -116,8 +116,9 @@ const ResetPassword = () => {
             variant="contained"
             color="primary"
             sx={{ mt: 3, mb: 2 }}
+            disabled={isLoading}
           >
-            Reset Password
+            {isLoading ? "Mohon tunggu ..." : "Reset Password"}
           </Button>
         </Box>
       </Paper>
