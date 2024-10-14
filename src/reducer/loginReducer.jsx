@@ -1,7 +1,7 @@
 // loginSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UrlApi } from "../constants/api";
+import { UrlApi } from "../constants/ApiService";
 
 // Thunk untuk pendaftaran
 export const loginUser = createAsyncThunk(
@@ -9,7 +9,13 @@ export const loginUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(UrlApi.login, userData);
-      return response.data;
+
+      // Pastikan response.data dan response.data.token ada
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        localStorage.setItem("authToken", token); // Simpan token ke localStorage
+      }
+      return response.data; // Mengembalikan seluruh data respons
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -24,7 +30,7 @@ const loginSlice = createSlice({
     error: null, // Tambahkan error ke state untuk menangani error
   },
   reducers: {
-    clearData: (state) => {
+    clearDataLogin: (state) => {
       state.data = null;
       state.error = null; // Reset error saat data dibersihkan
     },
@@ -47,5 +53,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const { clearData } = loginSlice.actions;
+export const { clearDataLogin } = loginSlice.actions;
 export default loginSlice.reducer;
