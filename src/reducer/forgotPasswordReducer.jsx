@@ -1,7 +1,7 @@
 // forgotPasswordSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UrlApi } from "../constants/api";
+import { UrlApi } from "../constants/ApiService";
 
 export const forgotPasswordReducer = createAsyncThunk(
   "forgotPassword/forgotPasswordReducer",
@@ -19,18 +19,30 @@ const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
   initialState: {
     data: null,
+    isLoading: false,
+    error: null,
   },
   reducers: {
     clearData: (state) => {
       state.data = null;
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(forgotPasswordReducer.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+        state.data = null;
+      })
       .addCase(forgotPasswordReducer.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
         state.data = action.payload;
       })
       .addCase(forgotPasswordReducer.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
         state.data = null;
       });
   },
