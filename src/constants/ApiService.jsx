@@ -1,5 +1,4 @@
 const url = "http://localhost/sample-app-login-be/public/api";
-// const url = "http://localhost/project-market/public/api";
 
 export const UrlApi = {
   login: `${url}/login`,
@@ -7,4 +6,6 @@ export const UrlApi = {
   forgotPassword: `${url}/forgot-password`,
   resetPassword: `${url}/reset-password`,
   validateRegister: `${url}/verify-otp`,
+  getDataUser: `${url}/get-data-user`,
+  changePassword: `${url}/change-password`,
 };
