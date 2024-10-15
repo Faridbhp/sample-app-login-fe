@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Paper,
@@ -11,52 +11,94 @@ import {
   ListItemText,
   Drawer,
   Divider,
+  IconButton,
+  Hidden,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearData } from "../../../reducer/loginReducer";
+import { clearDataLogin } from "../../../reducer/loginReducer";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   const handleLogout = () => {
-    // Logika untuk proses logout
     console.log("User logged out");
-    // Arahkan ke halaman login setelah logout (misal, menggunakan useNavigate dari react-router-dom)
     navigate("/login");
-    dispatch(clearData());
+    dispatch(clearDataLogin());
   };
 
-  const menuItems = ["Dashboard", "Profile", "Settings", "Reports"];
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const menuItems = [
+    { text: "Dashboard", path: "home" },
+    { text: "Profile", path: "profile" },
+  ];
+
+  const drawer = (
+    <div>
+      <div style={{ padding: "10px" }}>
+        <Typography variant="h5" align="center">
+          Menu
+        </Typography>
+      </div>
+      <Divider />
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem button key={item.text} component={Link} to={item.path}>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
   return (
     <div style={{ display: "flex" }}>
-      {/* Sidebar */}
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        style={{ width: "240px", flexShrink: 0 }}
-        PaperProps={{ style: { width: "240px" } }}
-      >
-        <div style={{ padding: "10px" }}>
-          <Typography variant="h5" align="center">
-            Menu
-          </Typography>
-        </div>
-        <Divider />
-        <List>
-          {menuItems.map((text, index) => (
-            <ListItem button key={index}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+      {/* Sidebar for larger screens */}
+      <Hidden mdDown>
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          style={{ width: "240px", flexShrink: 0 }}
+          PaperProps={{ style: { width: "240px" } }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+
+      {/* Temporary Drawer for smaller screens */}
+      <Hidden mdUp>
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          PaperProps={{ style: { width: "240px" } }}
+          ModalProps={{
+            keepMounted: true, // Better performance on mobile
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
 
       <div style={{ flexGrow: 1 }}>
         {/* Navbar */}
         <AppBar position="fixed" style={{ zIndex: 1201 }}>
           <Toolbar style={{ justifyContent: "space-between" }}>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { md: "none" } }}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h6">Dashboard</Typography>
             <Button color="inherit" onClick={handleLogout}>
               Logout
@@ -64,45 +106,21 @@ const Dashboard = () => {
           </Toolbar>
         </AppBar>
 
-        {/* Spacing untuk AppBar */}
+        {/* Spacing for AppBar */}
         <Toolbar />
 
         {/* Main Content */}
-        <Grid container spacing={3} style={{ padding: "20px" }}>
-          {/* Statistics Cards */}
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper elevation={3} style={{ padding: "20px" }}>
-              <Typography variant="h6">Total Users</Typography>
-              <Typography variant="h4">100</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper elevation={3} style={{ padding: "20px" }}>
-              <Typography variant="h6">Active Users</Typography>
-              <Typography variant="h4">80</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Paper elevation={3} style={{ padding: "20px" }}>
-              <Typography variant="h6">New Registrations</Typography>
-              <Typography variant="h4">5</Typography>
-            </Paper>
-          </Grid>
-
-          {/* Recent Activity */}
-          <Grid item xs={12}>
-            <Paper elevation={3} style={{ padding: "20px" }}>
-              <Typography variant="h6" component="h2">
-                Recent Activity
-              </Typography>
-              <ul>
-                <li>User A registered</li>
-                <li>User B updated profile</li>
-                <li>User C made a purchase</li>
-              </ul>
-            </Paper>
-          </Grid>
-        </Grid>
+        <div
+          style={{
+            backgroundColor: "white",
+            minWidth: "100%",
+            borderRadius: 15,
+            justifyContent: "center",
+            paddingTop: '20px'
+          }}
+        >
+          <Outlet />
+        </div>
       </div>
     </div>
   );
