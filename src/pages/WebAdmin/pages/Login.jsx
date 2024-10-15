@@ -31,8 +31,8 @@ const Login = () => {
   );
   const { isLoadingDataUser } = useSelector((state) => state.login);
   const [formData, setFormData] = useState({
-    email: "farid.bhp9431@gmail.com",
-    password: "P@svv0rd1",
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [dataValidateRegister, setDataValidateRegister] = useState(null);

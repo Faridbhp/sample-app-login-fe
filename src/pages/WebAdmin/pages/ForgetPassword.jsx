@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 const ForgetPassword = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    email: "farid.bhp9431@gmail.com",
+    email: "",
   });
   const { data: dataForgetPassword, isLoading } = useSelector(
     (state) => state.forgotPassword
