@@ -113,12 +113,14 @@ const Login = () => {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ mt: 4 }}>
-      <PopUp
-        open={open}
-        onClose={handleClose}
-        message={dataValidateRegister?.message}
-        isSuccess="Success"
-      />
+       {dataValidateRegister && (
+        <Alert
+          severity={dataValidateRegister?.message === "OTP verified." ? "success" : "error"}
+          sx={{ mb: 2 }} // Added margin for spacing
+        >
+          {dataValidateRegister?.message}
+        </Alert>
+      )}
       <Paper
         elevation={6}
         sx={{
