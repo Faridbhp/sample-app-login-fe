@@ -134,7 +134,7 @@ const Profile = () => {
             />
           </Grid>
           <Grid item xs={12} container justifyContent="center">
-            <Grid item xs={6}>
+            <Grid item sm={6} xs={9}>
               <ButtonCustom
                 isDisabled={
                   isLoading ||
@@ -152,8 +152,8 @@ const Profile = () => {
           </Grid>
         </Grid>
       )}
-      <Grid item xs={12} container justifyContent="center" marginTop={0}>
-        <Grid item xs={6}>
+      <Grid item xs={12} container justifyContent="center" marginBottom={10}>
+        <Grid item sm={6} xs={9}>
           <ButtonCustom
             variant="contained"
             color="primary"
