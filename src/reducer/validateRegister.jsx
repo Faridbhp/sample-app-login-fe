@@ -1,7 +1,7 @@
 // validateRegisterSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { UrlApi } from "../constants/api";
+import { UrlApi } from "../constants/ApiService";
 
 // Thunk untuk pendaftaran
 export const validateRegisterReducer = createAsyncThunk(
